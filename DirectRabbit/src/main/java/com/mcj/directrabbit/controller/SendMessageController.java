@@ -1,5 +1,6 @@
 package com.mcj.directrabbit.controller;
 
+import com.mcj.directrabbit.sender.MessageSender;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class SendMessageController {
 
     @Autowired
     RabbitTemplate rabbitTemplate;
+    @Autowired
+    MessageSender messageSender;
 
     @GetMapping("/send/direct/message")
     public String sendDirectMessage(){
@@ -33,9 +36,7 @@ public class SendMessageController {
         map.put("messageId", messageId);
         map.put("messageData", messageData);
         map.put("createTime", createTime);
-        // 使用messageConverter来支持消息内容能够JSON序列化与反序列化
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
-        rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", map);
+        messageSender.sendMessage("TestDirectExchange", "TestDirectRouting", map);
         return "OK";
     }
 
@@ -48,9 +49,7 @@ public class SendMessageController {
         map.put("messageId", messageId);
         map.put("messageData", messageData);
         map.put("createTime", createTime);
-        // 使用messageConverter来支持消息内容能够JSON序列化与反序列化
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
-        rabbitTemplate.convertAndSend("TopicExchange", "topic.man", map);
+        messageSender.sendMessage("TopicExchange", "topic.man", map);
         return "OK";
     }
 
@@ -63,9 +62,7 @@ public class SendMessageController {
         map.put("messageId", messageId);
         map.put("messageData", messageData);
         map.put("createTime", createTime);
-        // 使用messageConverter来支持消息内容能够JSON序列化与反序列化
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
-        rabbitTemplate.convertAndSend("TopicExchange", "topic.women", map);
+        messageSender.sendMessage("TopicExchange", "topic.women", map);
         return "OK";
     }
 
@@ -78,9 +75,7 @@ public class SendMessageController {
         map.put("messageId", messageId);
         map.put("messageData", messageData);
         map.put("createTime", createTime);
-        // 使用messageConverter来支持消息内容能够JSON序列化与反序列化
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
-        rabbitTemplate.convertAndSend("FanoutExchange", null, map);
+        messageSender.sendMessage("FanoutExchange", map);
         return "OK";
     }
 

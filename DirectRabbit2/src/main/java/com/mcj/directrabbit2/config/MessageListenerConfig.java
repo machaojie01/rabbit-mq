@@ -33,7 +33,7 @@ public class MessageListenerConfig {
         // 设置一个队列,
         // 如果想设置多个队列，直接在后面加逗号和队列名 如：
         // container.setQueueNames("TestDirectQueue", "FanoutQueue1", "FanoutQueue2"); 需要注意的是这里的队列名必须是都要存在的
-        container.setQueueNames("TestDirectQueue", "FanoutQueue1");
+        container.setQueueNames("TestDirectQueue", "FanoutQueue1", "FanoutQueue2", "FanoutQueue3", "FirstQueue", "SecondQueue", "ThirdQueue");
 
         //另一种设置队列的方法,如果使用这种情况,那么要设置多个,就使用addQueues
         //container.setQueues(new Queue("TestDirectQueue",true));

@@ -10,8 +10,9 @@ import java.util.Map;
  * @Author machaojie
  * email machaojie@utry.cn
  * @Date 2021/10/29 11:47
+ * 监听主题交换机对应的队列的类，这个是没有消费者消息确认机制的监听类
  */
-@Component
+//@Component
 public class TopicReceiver {
 
     @RabbitListener(queues = "FirstQueue")

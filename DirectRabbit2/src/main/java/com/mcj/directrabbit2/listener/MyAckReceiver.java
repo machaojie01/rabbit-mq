@@ -6,7 +6,6 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,6 +13,7 @@ import java.util.Map;
  * email machaojie@utry.cn
  * @Date 2021/10/29 15:38
  * 消息接收处理类
+ * 这个是消费者有消息确认机制的处理类
  */
 @Component
 public class MyAckReceiver implements ChannelAwareMessageListener {
@@ -38,6 +38,26 @@ public class MyAckReceiver implements ChannelAwareMessageListener {
                 System.out.println("  MyAckReceiver  messageId:" + messageId + "  messageData:" + messageData + "  createTime:" + createTime);
                 System.out.println("消费的主题消息来自：" + message.getMessageProperties().getConsumerQueue());
                 System.out.println("执行FanoutQueue1中的消息的业务处理流程......");
+            } else if (message.getMessageProperties().getConsumerQueue().equals("FanoutQueue2")) {
+                System.out.println("  MyAckReceiver  messageId:" + messageId + "  messageData:" + messageData + "  createTime:" + createTime);
+                System.out.println("消费的主题消息来自：" + message.getMessageProperties().getConsumerQueue());
+                System.out.println("执行FanoutQueue2中的消息的业务处理流程......");
+            } else if (message.getMessageProperties().getConsumerQueue().equals("FanoutQueue3")) {
+                System.out.println("  MyAckReceiver  messageId:" + messageId + "  messageData:" + messageData + "  createTime:" + createTime);
+                System.out.println("消费的主题消息来自：" + message.getMessageProperties().getConsumerQueue());
+                System.out.println("执行FanoutQueue3中的消息的业务处理流程......");
+            } else if (message.getMessageProperties().getConsumerQueue().equals("FirstQueue")) {
+                System.out.println("  MyAckReceiver  messageId:" + messageId + "  messageData:" + messageData + "  createTime:" + createTime);
+                System.out.println("消费的主题消息来自：" + message.getMessageProperties().getConsumerQueue());
+                System.out.println("执行FirstQueue中的消息的业务处理流程......");
+            } else if (message.getMessageProperties().getConsumerQueue().equals("SecondQueue")) {
+                System.out.println("  MyAckReceiver  messageId:" + messageId + "  messageData:" + messageData + "  createTime:" + createTime);
+                System.out.println("消费的主题消息来自：" + message.getMessageProperties().getConsumerQueue());
+                System.out.println("执行SecondQueue中的消息的业务处理流程......");
+            } else if (message.getMessageProperties().getConsumerQueue().equals("ThirdQueue")) {
+                System.out.println("  MyAckReceiver  messageId:" + messageId + "  messageData:" + messageData + "  createTime:" + createTime);
+                System.out.println("消费的主题消息来自：" + message.getMessageProperties().getConsumerQueue());
+                System.out.println("执行ThirdQueue中的消息的业务处理流程......");
             }
             // 用于肯定确认
             channel.basicAck(deliveryTag, true);  //第二个参数，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息

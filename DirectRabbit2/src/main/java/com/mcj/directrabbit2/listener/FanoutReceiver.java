@@ -10,6 +10,7 @@ import java.util.Map;
  * @Author machaojie
  * email machaojie@utry.cn
  * @Date 2021/10/29 14:18
+ * 监听扇形交换机对应队列的类，这个是没有对应的消费者消息确认机制的
  */
 //@Component
 public class FanoutReceiver {
